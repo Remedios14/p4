@@ -400,10 +400,14 @@ func interpretResult(in map[interface{}]interface{}, command string) Result {
 			User:       imap["user"].(string),
 			Describe:   imap["desc"].(string),
 			ChangeType: imap["changeType"].(string),
-			Path:       imap["path"].(string),
 			Time:       imap["time"].(string),
 			Client:     imap["client"].(string),
 			Status:     imap["status"].(string),
+		}
+		if v, exist := imap["path"]; exist {
+			if sv, ok := v.(string); ok {
+				d.Path = sv
+			}
 		}
 		return &d
 
